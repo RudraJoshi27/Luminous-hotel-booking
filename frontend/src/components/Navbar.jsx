@@ -1,15 +1,18 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = ({ isTransparent }) => {
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
     navigate('/');
   };
+
+  const isActive = (path) => location.pathname === path ? 'active' : '';
 
   return (
     <nav style={{ 
@@ -77,12 +80,12 @@ const Navbar = ({ isTransparent }) => {
 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <Link to="/search" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Hotels</Link>
-          <Link to="/bookings" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>My Bookings</Link>
-          <Link to="/list-hotel" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>List Property</Link>
-          <Link to="/settings" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Settings</Link>
+          <Link to="/search" className={`nav-link ${isActive('/search')}`} style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Hotels</Link>
+          <Link to="/bookings" className={`nav-link ${isActive('/bookings')}`} style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>My Bookings</Link>
+          <Link to="/list-hotel" className={`nav-link ${isActive('/list-hotel')}`} style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>List Property</Link>
+          <Link to="/settings" className={`nav-link ${isActive('/settings')}`} style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Settings</Link>
           {user?.role === 'admin' && (
-            <Link to="/admin/users" className="nav-link active" style={{ color: 'var(--primary)', fontWeight: 700 }}>Manage Users</Link>
+            <Link to="/admin/users" className={`nav-link ${isActive('/admin/users')}`} style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Manage Users</Link>
           )}
         </div>
 
