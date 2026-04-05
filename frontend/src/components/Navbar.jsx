@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
@@ -6,22 +6,36 @@ const Navbar = ({ isTransparent }) => {
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [showUserPopup, setShowUserPopup] = useState(false);
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowUserPopup(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
+    setShowUserPopup(false);
     navigate('/');
   };
 
   const isActive = (path) => location.pathname === path ? 'active' : '';
 
   return (
-    <nav style={{ 
-      background: isTransparent ? 'transparent' : 'rgba(255, 255, 255, 0.85)', 
-      backdropFilter: isTransparent ? 'none' : 'blur(12px)',
-      borderBottom: isTransparent ? 'none' : '1px solid var(--outline-variant)', 
-      padding: '0.75rem 2rem', 
-      position: 'fixed', 
-      top: 0, 
+    <nav style={{
+      background: isTransparent ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.50)',
+      backdropFilter: 'blur(16px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+      padding: '0.75rem 2rem',
+      position: 'fixed',
+      top: 0,
       left: 0,
       right: 0,
       zIndex: 1000,
@@ -29,7 +43,7 @@ const Navbar = ({ isTransparent }) => {
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        
+
         {/* Logo Section */}
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 188, 212, 0.25))', transition: 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.08) rotate(-4deg)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}>
@@ -47,10 +61,10 @@ const Navbar = ({ isTransparent }) => {
                 <stop offset="100%" stopColor="#E0F7FA" />
               </linearGradient>
               <filter id="sparkGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                <feGaussianBlur stdDeviation="1.5" result="blur" />
                 <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
@@ -60,21 +74,25 @@ const Navbar = ({ isTransparent }) => {
 
             {/* Vertical Pill */}
             <rect x="6" y="4" width="12" height="30" rx="6" fill="url(#lGrad1)" />
-            
+
             {/* Horizontal Pill */}
             <rect x="6" y="22" width="24" height="12" rx="6" fill="url(#lGrad2)" />
-            
+
             {/* The Spark (Luminosity element) */}
-            <path d="M30 2 C 30 7, 26 10, 20 10 C 26 10, 30 13, 30 18 C 30 13, 34 10, 40 10 C 34 10, 30 7, 30 2 Z" fill="url(#lGrad3)" filter="url(#sparkGlow)"/>
+            <path d="M30 2 C 30 7, 26 10, 20 10 C 26 10, 30 13, 30 18 C 30 13, 34 10, 40 10 C 34 10, 30 7, 30 2 Z" fill="url(#lGrad3)" filter="url(#sparkGlow)" />
           </svg>
-          <span className="branding-gradient" style={{ 
-            fontSize: '1.85rem', 
-            fontWeight: 800, 
+          <div className="branding-container" style={{
+            fontSize: '1.85rem',
+            fontWeight: 800,
             letterSpacing: '-0.03em',
-            fontFamily: 'var(--font-display)'
+            fontFamily: 'var(--font-display)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.2rem'
           }}>
-            LuminousLogic
-          </span>
+            <span className="branding-luminous">Luminous</span>
+            <span className="branding-logic">Logic</span>
+          </div>
         </Link>
 
         {/* Navigation Tabs */}
@@ -89,28 +107,58 @@ const Navbar = ({ isTransparent }) => {
         </div>
 
         {/* User Auth Section */}
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }} ref={popupRef}>
           {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-              <div style={{ textAlign: 'right' }}>
-                <p style={{ fontSize: '0.85rem', fontWeight: 700, color: isTransparent ? '#fff' : 'var(--on-surface)', transition: 'color 0.4s' }}>{user.username}</p>
-                <p style={{ fontSize: '0.7rem', color: 'var(--error)', cursor: 'pointer', fontWeight: 600 }} onClick={handleLogout}>Logout</p>
-              </div>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                borderRadius: '50%', 
-                background: 'var(--primary-container)', 
-                color: 'var(--primary-dark)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                fontWeight: 700,
-                fontSize: '1rem',
-                border: '2px solid var(--primary-light)'
-              }}>
+            <div style={{ position: 'relative' }}>
+              {/* Profile Avatar Trigger */}
+              <div
+                onClick={() => setShowUserPopup(!showUserPopup)}
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  background: 'var(--primary-container)',
+                  color: 'var(--primary-dark)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 800,
+                  fontSize: '1.1rem',
+                  border: `2px solid ${isTransparent ? 'rgba(255,255,255,0.3)' : 'var(--primary-light)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
                 {user.username.charAt(0).toUpperCase()}
               </div>
+
+              {/* Gmail-Style User Popup */}
+              {showUserPopup && (
+                <div className="user-popup">
+                  <div className="user-popup-avatar-large">
+                    {user.username.charAt(0).toUpperCase()}
+                  </div>
+                  <h3 className="user-popup-name">Hi, {user.username}!</h3>
+                  <span className="user-popup-role">{user.role}</span>
+                  
+                  <Link to="/settings" className="user-popup-action" onClick={() => setShowUserPopup(false)}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Manage Account
+                  </Link>
+
+                  <div className="user-popup-footer">
+                    <button className="user-popup-logout" onClick={handleLogout}>
+                      Sign out of LuminousLogic
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -125,3 +173,4 @@ const Navbar = ({ isTransparent }) => {
 };
 
 export default Navbar;
+
