@@ -142,6 +142,7 @@ const Navbar = ({ isTransparent }) => {
                     {user.username.charAt(0).toUpperCase()}
                   </div>
                   <h3 className="user-popup-name">Hi, {user.username}!</h3>
+                  <p className="user-popup-email">{user.email}</p>
                   <span className="user-popup-role">{user.role}</span>
 
                   <Link to="/settings" className="user-popup-action" onClick={() => setShowUserPopup(false)}>

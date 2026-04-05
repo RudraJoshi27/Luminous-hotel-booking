@@ -446,7 +446,14 @@ input[type="radio"] {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--on-surface);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.user-popup-email {
+  font-size: 0.9rem;
+  color: var(--on-surface-subtle);
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .user-popup-role {
