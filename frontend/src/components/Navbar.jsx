@@ -71,8 +71,7 @@ const Navbar = ({ isTransparent }) => {
             fontSize: '1.85rem', 
             fontWeight: 800, 
             letterSpacing: '-0.03em',
-            fontFamily: 'var(--font-display)',
-            transition: 'color 0.4s'
+            fontFamily: 'var(--font-display)'
           }}>
             LuminousLogic
           </span>
