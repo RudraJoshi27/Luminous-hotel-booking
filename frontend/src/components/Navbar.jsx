@@ -80,6 +80,7 @@ const Navbar = ({ isTransparent }) => {
           <Link to="/search" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>Hotels</Link>
           <Link to="/bookings" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>My Bookings</Link>
           <Link to="/list-hotel" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>List Property</Link>
+          <Link to="/settings" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>Settings</Link>
           {user?.role === 'admin' && (
             <Link to="/admin/users" style={{ textDecoration: 'none', color: 'var(--primary)', fontWeight: 700, fontSize: '0.95rem', transition: 'color 0.4s' }}>Manage Users</Link>
           )}

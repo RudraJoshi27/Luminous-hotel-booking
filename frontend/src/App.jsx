@@ -9,6 +9,7 @@ import ListHotel from './pages/ListHotel';
 import HotelDetail from './pages/HotelDetail';
 import MyBookings from './pages/MyBookings';
 import AdminUsers from './pages/AdminUsers';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/hotel/:id" element={<HotelDetail />} />
         <Route path="/bookings" element={<MyBookings />} />
         <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );

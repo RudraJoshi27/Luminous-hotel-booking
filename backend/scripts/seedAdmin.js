@@ -13,24 +13,24 @@ const seedAdmin = async () => {
     await mongoose.connect(mongoUri);
     console.log("Connected to MongoDB for Admin Seeding.");
 
-    const adminExists = await User.findOne({ username: "superadmin" });
+    const adminExists = await User.findOne({ username: "admin" });
     if (adminExists) {
-      console.log("Admin user 'superadmin' already exists.");
+      console.log("Admin user 'admin' already exists.");
       process.exit(0);
     }
 
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync("admin123", salt);
+    const hash = bcrypt.hashSync("admin12345", salt);
 
     const admin = new User({
-      username: "superadmin",
+      username: "admin",
       email: "admin@luminous.com",
       password: hash,
       role: "admin"
     });
 
     await admin.save();
-    console.log("Admin user 'superadmin' created successfully with password 'admin123'.");
+    console.log("Admin user 'admin' created successfully with password 'admin12345'.");
     process.exit(0);
   } catch (error) {
     console.error("SEEDING ERROR:", error);
