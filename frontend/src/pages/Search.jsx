@@ -64,11 +64,11 @@ const Search = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '70px' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '80px' }}>
       <Navbar />
       
       {/* Sticky Search Header */}
-      <div style={{ background: 'var(--surface)', padding: '1.5rem 0', borderBottom: '1px solid var(--outline-variant)', position: 'sticky', top: '70px', zIndex: 10 }}>
+      <div style={{ background: 'var(--surface)', padding: '1.5rem 0', borderBottom: '1px solid var(--outline-variant)', position: 'sticky', top: '80px', zIndex: 10 }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
           <SearchBar 
             initialData={{ city: filters.city }} 

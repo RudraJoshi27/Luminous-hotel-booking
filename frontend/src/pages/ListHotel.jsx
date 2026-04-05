@@ -113,7 +113,7 @@ const ListHotel = () => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--background)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '80px' }}>
       <Navbar />
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
         {/* Header */}

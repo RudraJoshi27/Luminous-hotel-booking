@@ -46,7 +46,7 @@ const MyBookings = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '70px' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '80px' }}>
       <Navbar />
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>My Reservations</h1>

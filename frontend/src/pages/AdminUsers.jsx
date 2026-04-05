@@ -69,9 +69,9 @@ const AdminUsers = () => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--background)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--background)', paddingTop: '80px' }}>
       <Navbar />
-      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '3rem 2rem' }}>
+      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem' }}>
         <div style={{ marginBottom: '2.5rem' }}>
           <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Manage Users</h1>
           <p style={{ color: 'var(--on-surface-subtle)', fontWeight: 500 }}>
