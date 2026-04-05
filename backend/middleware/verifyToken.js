@@ -18,4 +18,14 @@ const verifyAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { verifyToken, verifyAdmin };
+const verifyUser = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.id === req.params.id || req.user.role === 'admin') {
+      next();
+    } else {
+      return res.status(403).json({ message: 'You are not authorized to update this account!' });
+    }
+  });
+};
+
+module.exports = { verifyToken, verifyAdmin, verifyUser };
