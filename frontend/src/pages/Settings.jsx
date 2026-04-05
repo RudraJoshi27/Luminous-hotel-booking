@@ -54,7 +54,12 @@ const Settings = () => {
                 <div className="glass-panel fade-in" style={{ padding: '3rem' }}>
                     <div style={{ marginBottom: '2rem' }}>
                         <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Account Settings</h1>
-                        <p style={{ color: 'var(--on-surface-subtle)' }}>Update your administrative credentials and profile information.</p>
+                        <p style={{ color: 'var(--on-surface-subtle)', lineHeight: '1.5' }}>
+                            {user?.role === 'admin' 
+                                ? "Update your administrative credentials and profile information." 
+                                : "Manage your account details and profile information."
+                            }
+                        </p>
                     </div>
 
                     <form onSubmit={handleSubmit}>
