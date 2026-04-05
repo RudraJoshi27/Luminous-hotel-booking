@@ -77,12 +77,12 @@ const Navbar = ({ isTransparent }) => {
 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <Link to="/search" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>Hotels</Link>
-          <Link to="/bookings" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>My Bookings</Link>
-          <Link to="/list-hotel" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>List Property</Link>
-          <Link to="/settings" style={{ textDecoration: 'none', color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)', fontWeight: 600, fontSize: '0.95rem', transition: 'color 0.4s' }}>Settings</Link>
+          <Link to="/search" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Hotels</Link>
+          <Link to="/bookings" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>My Bookings</Link>
+          <Link to="/list-hotel" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>List Property</Link>
+          <Link to="/settings" className="nav-link" style={{ color: isTransparent ? 'rgba(255,255,255,0.85)' : 'var(--on-surface-subtle)' }}>Settings</Link>
           {user?.role === 'admin' && (
-            <Link to="/admin/users" style={{ textDecoration: 'none', color: 'var(--primary)', fontWeight: 700, fontSize: '0.95rem', transition: 'color 0.4s' }}>Manage Users</Link>
+            <Link to="/admin/users" className="nav-link active" style={{ color: 'var(--primary)', fontWeight: 700 }}>Manage Users</Link>
           )}
         </div>
 
