@@ -29,7 +29,7 @@ const Navbar = ({ isTransparent }) => {
 
   return (
     <nav style={{
-      background: isTransparent ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.50)',
+      background: isTransparent ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.50)',
       backdropFilter: 'blur(16px) saturate(180%)',
       WebkitBackdropFilter: 'blur(16px) saturate(180%)',
       borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
@@ -143,7 +143,7 @@ const Navbar = ({ isTransparent }) => {
                   </div>
                   <h3 className="user-popup-name">Hi, {user.username}!</h3>
                   <span className="user-popup-role">{user.role}</span>
-                  
+
                   <Link to="/settings" className="user-popup-action" onClick={() => setShowUserPopup(false)}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
