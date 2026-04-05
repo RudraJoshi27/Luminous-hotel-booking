@@ -155,7 +155,7 @@ const Navbar = ({ isTransparent }) => {
 
                   <div className="user-popup-footer">
                     <button className="user-popup-logout" onClick={handleLogout}>
-                      Sign out of LuminousLogic
+                      Sign out of Luminous Logic
                     </button>
                   </div>
                 </div>
