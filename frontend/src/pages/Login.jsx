@@ -32,7 +32,7 @@ const Login = () => {
         <div className="glass-panel fade-in" style={{ padding: '3rem', width: '100%', maxWidth: '420px', textAlign: 'center' }}>
           <div style={{ marginBottom: '2.5rem' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--on-surface)' }}>Welcome Back</h2>
-            <p style={{ color: 'var(--on-surface-subtle)', fontSize: '0.95rem' }}>Login to your Luminous Logic account</p>
+            <p style={{ color: 'var(--on-surface-subtle)', fontSize: '0.95rem' }}>Login to your HotelXpress account</p>
           </div>
 
           <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>

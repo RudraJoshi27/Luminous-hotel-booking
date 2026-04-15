@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar';
 import HotelCard from '../components/HotelCard';
 import axios from 'axios';
 
-const PROPERTY_TYPES = ['Hotel', 'Resort', 'Villa', 'Hostel', 'Apartment', 'Homestay'];
+const PROPERTY_TYPES = ['Hotel', 'Resort', 'Villa', 'Apartment', 'Homestay'];
 const AMENITIES = ['Free WiFi', 'Swimming Pool', 'Parking', 'Spa', 'Gym', 'Restaurant'];
 
 const Search = () => {

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 
-const PROPERTY_TYPES = ['Hotel', 'Resort', 'Villa', 'Hostel', 'Apartment', 'Homestay', 'Boutique Hotel'];
+const PROPERTY_TYPES = ['Hotel', 'Resort', 'Villa', 'Apartment', 'Homestay', 'Boutique Hotel'];
 
 const InputField = ({ label, id, type = 'text', value, onChange, placeholder, required = true, children }) => (
   <div style={{ marginBottom: '1.25rem' }}>
@@ -119,7 +119,7 @@ const ListHotel = () => {
         {/* Header */}
         <div style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>List Your Property</h1>
-          <p style={{ color: 'var(--on-surface-variant)' }}>Start your journey with Luminous Logic today.</p>
+          <p style={{ color: 'var(--on-surface-variant)' }}>Start your journey with HotelXpress today.</p>
         </div>
 
         <form onSubmit={handleSubmit}>

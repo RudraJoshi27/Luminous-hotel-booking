@@ -20,6 +20,7 @@ const AMENITIES = ['Free WiFi', 'Swimming Pool', 'Parking', 'Spa', 'Gym', 'Resta
 
 const generateHotels = () => {
   const hotels = [];
+  let hotelImageIndex = 1;
   
   cities.forEach(city => {
     // Generate 3 hotels per city
@@ -33,13 +34,20 @@ const generateHotels = () => {
        const shuffled = [...AMENITIES].sort(() => 0.5 - Math.random());
        const selectedAmenities = shuffled.slice(0, Math.floor(Math.random() * 3) + 3);
 
+       // Use local images hotel_1.jpg to hotel_150.jpg (based on city/index)
+       const photoUrl = `http://localhost:5000/hotel_images/hotel_${hotelImageIndex}.jpg`;
+       hotelImageIndex++;
+
+       const types = ['Hotel', 'Resort', 'Villa', 'Apartment', 'Homestay'];
+       const selectedType = types[hotelImageIndex % types.length];
+
        hotels.push({
          name: randomName,
-         type: starRating === 5 ? "Resort" : "Hotel",
+         type: selectedType,
          city: city,
          address: `Central District, ${city}`,
          distance: `${(Math.random() * 5).toFixed(1)} km from city center`,
-         photos: [`https://picsum.photos/seed/${city.replace(' ', '')}${i}/600/400`],
+         photos: [photoUrl],
          title: `Experience the best of ${city}`,
          desc: `A highly rated ${starRating}-star property located strictly in the heart of ${city}. Perfect for leisure and business.`,
          rating: Number(userRating),

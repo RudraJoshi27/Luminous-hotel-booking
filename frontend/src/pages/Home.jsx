@@ -83,7 +83,7 @@ const Home = () => {
               textShadow: '0 4px 40px rgba(0,0,0,0.6)',
               letterSpacing: '-0.03em'
             }}>
-              Luminous <span style={{ fontWeight: 300, color: 'var(--primary)', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}>Logic</span> Stays
+              Hotel <span style={{ fontWeight: 300, color: 'var(--primary)', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}>Xpress</span> Stays
             </h1>
             <p className="fade-in" style={{
               color: 'rgba(255,255,255,1)',
@@ -221,7 +221,7 @@ const Home = () => {
             textAlign: 'center'
           }}>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '4rem', fontWeight: 800, color: 'var(--on-surface)' }}>
-              Why Choose <span className="text-gradient">Luminous Logic</span>?
+              Why Choose <span className="text-gradient">HotelXpress</span>?
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }}>
               {[
@@ -249,7 +249,7 @@ const Home = () => {
             border: '1px solid var(--outline-variant)'
           }}>
             <div>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>Host your space and join the <span className="text-gradient">Luminous</span> network.</h2>
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>Host your space and join the <span className="text-gradient">HotelXpress</span> network.</h2>
               <p style={{ color: 'var(--on-surface-subtle)', marginBottom: '3rem', fontSize: '1.1rem', lineHeight: '1.6' }}>
                 We partner with homeowners and boutique hotels to offer unique stays. Get started with our expert listing assistant in minutes.
               </p>
@@ -306,12 +306,12 @@ const Home = () => {
                 fontFamily: 'var(--font-display)',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.2rem'
+                gap: '0rem'
               }}>
-                <span className="branding-luminous">Luminous</span>
-                <span className="branding-logic">Logic</span>
+                <span className="branding-luminous">Hotel</span>
+                <span className="branding-logic">Xpress</span>
               </div>
-              <p style={{ color: 'var(--on-surface-subtle)', fontSize: '0.9rem', marginTop: '0.5rem', fontWeight: 500 }}>© 2026 Luminous Logic Inc. All rights reserved.</p>
+              <p style={{ color: 'var(--on-surface-subtle)', fontSize: '0.9rem', marginTop: '0.5rem', fontWeight: 500 }}>© 2026 HotelXpress Inc. All rights reserved.</p>
             </div>
             <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600 }}>
               <span className="footer-link">Privacy Policy</span>

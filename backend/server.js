@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const path = require('path');
+
 // Import models to ensure they are loaded
 require('./models/User');
 require('./models/Hotel');
@@ -16,6 +18,9 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
+
+// Serve hotel_images from the root directory
+app.use('/hotel_images', express.static(path.join(__dirname, '../hotel_images')));
 
 // Database connection
 const connect = async () => {

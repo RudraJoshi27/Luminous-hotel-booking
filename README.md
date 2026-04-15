@@ -1,6 +1,6 @@
-# Luminous Logic Hotel Booking 🏨✨
+# HotelXpress - Premium Hotel Booking 🏨✨
 
-A modern, premium, full-stack web application designed for curated hotel and boutique resort bookings. **Luminous Logic** was built to provide a flawless, high-end user experience focusing on visual excellence, responsive design, and robust backend handling.
+A modern, premium, full-stack web application designed for curated hotel and boutique resort bookings. **HotelXpress** was built to provide a flawless, high-end user experience focusing on visual excellence, responsive design, and robust backend handling.
 
 ## 🚀 Features
 
