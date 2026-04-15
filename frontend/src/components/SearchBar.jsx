@@ -11,8 +11,19 @@ const SearchBar = ({ onSearch, initialData = {} }) => {
     checkOut: initialData.checkOut || new Date(Date.now() + 86400000).toISOString().split('T')[0]
   });
   const [showDropdown, setShowDropdown] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSearch = () => {
+    if (!dates.checkIn || !dates.checkOut) {
+      setError('Please select check-in and check-out dates.');
+      return;
+    }
+    if (new Date(dates.checkIn) >= new Date(dates.checkOut)) {
+      setError('Check-out date must be after Check-in date.');
+      return;
+    }
+    setError('');
+    
     const searchData = { destination, adults, rooms, ...dates };
     if (onSearch) {
       onSearch(searchData);
@@ -67,7 +78,11 @@ const SearchBar = ({ onSearch, initialData = {} }) => {
             <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontWeight: 600 }}>Adults</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <button onClick={() => setAdults(Math.max(1, adults - 1))} style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1.5px solid var(--primary)', background: 'transparent', color: 'var(--primary)', cursor: 'pointer', fontWeight: 700 }}>-</button>
+                <button onClick={() => {
+                  const newAdults = Math.max(1, adults - 1);
+                  setAdults(newAdults);
+                  if (rooms > newAdults) setRooms(newAdults);
+                }} style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1.5px solid var(--primary)', background: 'transparent', color: 'var(--primary)', cursor: 'pointer', fontWeight: 700 }}>-</button>
                 <span style={{ fontWeight: 700, minWidth: '15px', textAlign: 'center' }}>{adults}</span>
                 <button onClick={() => setAdults(adults + 1)} style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--primary)', border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>+</button>
               </div>
@@ -77,7 +92,16 @@ const SearchBar = ({ onSearch, initialData = {} }) => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <button onClick={() => setRooms(Math.max(1, rooms - 1))} style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1.5px solid var(--primary)', background: 'transparent', color: 'var(--primary)', cursor: 'pointer', fontWeight: 700 }}>-</button>
                 <span style={{ fontWeight: 700, minWidth: '15px', textAlign: 'center' }}>{rooms}</span>
-                <button onClick={() => setRooms(rooms + 1)} style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--primary)', border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>+</button>
+                <button 
+                  onClick={() => { if (rooms < adults) setRooms(rooms + 1); }} 
+                  disabled={rooms >= adults}
+                  style={{ 
+                    width: '32px', height: '32px', borderRadius: '50%', 
+                    background: rooms >= adults ? 'var(--outline-variant)' : 'var(--primary)', 
+                    border: 'none', color: '#fff', 
+                    cursor: rooms >= adults ? 'not-allowed' : 'pointer', fontWeight: 700 
+                  }}
+                >+</button>
               </div>
             </div>
             <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', padding: '10px' }} onClick={() => setShowDropdown(false)}>Apply</button>
@@ -107,11 +131,23 @@ const SearchBar = ({ onSearch, initialData = {} }) => {
         </div>
       </div>
 
-      <button className="btn-primary" style={{ height: '54px', padding: '0 36px', borderRadius: 'var(--radius-sm)', fontSize: '1.1rem', fontWeight: 700, marginLeft: 'auto' }} onClick={handleSearch}>
-        Search
-      </button>
-    </div>
-  );
+        <button className="btn-primary" style={{ height: '54px', padding: '0 36px', borderRadius: 'var(--radius-sm)', fontSize: '1.1rem', fontWeight: 700, marginLeft: 'auto' }} onClick={handleSearch}>
+          Search
+        </button>
+
+        {error && (
+          <div className="fade-in" style={{ 
+            position: 'absolute', top: '105%', right: '0', 
+            background: 'var(--error-container)', color: 'var(--error)', 
+            padding: '8px 16px', borderRadius: 'var(--radius-sm)', 
+            fontSize: '0.85rem', fontWeight: 600, border: '1px solid var(--error)',
+            zIndex: 50, boxShadow: 'var(--shadow-sm)'
+          }}>
+            ⚠️ {error}
+          </div>
+        )}
+      </div>
+    );
 };
 
 export default SearchBar;
