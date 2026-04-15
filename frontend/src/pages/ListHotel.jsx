@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 
 const PROPERTY_TYPES = ['Hotel', 'Resort', 'Villa', 'Apartment', 'Homestay', 'Boutique Hotel'];
+const AMENITIES = ['Free WiFi', 'Swimming Pool', 'Parking', 'Spa', 'Gym', 'Restaurant'];
 
 const InputField = ({ label, id, type = 'text', value, onChange, placeholder, required = true, children }) => (
   <div style={{ marginBottom: '1.25rem' }}>
@@ -48,10 +49,25 @@ const ListHotel = () => {
     cheapestPrice: '',
     starRating: '3',
     photos: '',
+    amenities: [],
   });
 
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleAmenityChange = (amenity) => {
+    setForm(prev => {
+      const current = prev.amenities;
+      const index = current.indexOf(amenity);
+      if (index === -1) {
+        return { ...prev, amenities: [...current, amenity] };
+      } else {
+        const updated = [...current];
+        updated.splice(index, 1);
+        return { ...prev, amenities: updated };
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -103,7 +119,7 @@ const ListHotel = () => {
             <h2 style={{ marginBottom: '0.5rem', color: 'var(--success)' }}>Property Listed!</h2>
             <p style={{ color: 'var(--on-surface-variant)', marginBottom: '2rem' }}>Your property has been submitted and will appear in search results.</p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-              <button className="btn-secondary" onClick={() => { setSuccess(false); setForm({ name:'',type:'Hotel',city:'',address:'',distance:'',title:'',desc:'',cheapestPrice:'',starRating:'3',photos:'' }); }}>List Another</button>
+              <button className="btn-secondary" onClick={() => { setSuccess(false); setForm({ name:'',type:'Hotel',city:'',address:'',distance:'',title:'',desc:'',cheapestPrice:'',starRating:'3',photos:'',amenities:[] }); }}>List Another</button>
               <button className="btn-primary" onClick={() => navigate('/search')}>View Listings</button>
             </div>
           </div>
@@ -191,6 +207,33 @@ const ListHotel = () => {
                   </label>
                 ))}
               </div>
+            </div>
+          </div>
+
+          <div className="glass-panel" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
+            <h3 style={{ marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--outline-variant)', fontSize: '1.1rem' }}>
+              ✨ Amenities
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }}>
+              {AMENITIES.map(amenity => (
+                <label key={amenity} style={{
+                  display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '10px 14px',
+                  borderRadius: 'var(--radius-sm)', border: '1px solid var(--outline-variant)',
+                  background: form.amenities.includes(amenity) ? 'var(--primary-container)' : 'var(--surface)',
+                  transition: 'all 0.2s',
+                  boxShadow: form.amenities.includes(amenity) ? '0 2px 8px rgba(0,188,212,0.1)' : 'none'
+                }}>
+                  <input
+                    type="checkbox"
+                    checked={form.amenities.includes(amenity)}
+                    onChange={() => handleAmenityChange(amenity)}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--primary)' }}
+                  />
+                  <span style={{ fontSize: '0.95rem', fontWeight: form.amenities.includes(amenity) ? 600 : 400, color: 'var(--on-surface)' }}>
+                    {amenity}
+                  </span>
+                </label>
+              ))}
             </div>
           </div>
 
